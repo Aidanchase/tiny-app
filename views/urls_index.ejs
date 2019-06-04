@@ -6,13 +6,20 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <title>TinyApp</title>
 </head>
-<body style="font-size:20px; padding:50px;">
-    <ul>
-    <% for(let url in urls) { %>
-        <li><a href="#"><%= urls[url] %></a></li>
+<body  style="font-size:20px; padding:50px;">
+    <% include ./partials/_header %>
+    My U R ELLS
+    <table bgcolor = skyblue>
+    <th> URLOLS </th>
+    <th> Shortened! </th>
+    <% for(let url in urls) { %> 
+        <tr bgcolor = pink>
+       <td> <a href="#"><%= urls[url] %></a></td>
+       <td> <a href="#"><%= url %></a></td>
+        </tr>
+        
     <% } %>
-    </ul>
+    </table>
 </body>
 </html>
