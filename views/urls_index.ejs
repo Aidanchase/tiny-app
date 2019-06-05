@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
-<body  style="font-size:20px; padding:50px;">
-    <% include ./partials/_header %>
-    My U R ELLS
-    <table bgcolor = skyblue>
+
+<body style="font-size:20px; padding:50px;">
+  <% include ./partials/_header %>
+  My U R ELLS
+  <table bgcolor=skyblue>
     <th> URLOLS </th>
     <th> Shortened! </th>
-    <% for(let url in urls) { %> 
-        <tr bgcolor = pink>
-       <td> <a href="#"><%= urls[url] %></a></td>
-       <td> <a href="#"><%= url %></a></td>
-        </tr>
-        
+    <% for(let url in urls) { %>
+    <tr bgcolor=pink>
+      <td> <a href="#"><%= urls[url] %></a></td>
+      <td> <a href="#"><%= url %></a></td>
+    </tr>
+
     <% } %>
-    </table>
+  </table>
 </body>
+
 </html>
