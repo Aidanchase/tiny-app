@@ -17,9 +17,12 @@
     <th> URLOLS </th>
     <th> Shortened! </th>
     <% for(let url in urls) { %>
+    
     <tr bgcolor=pink>
       <td> <a href="#"><%= urls[url] %></a></td>
+      
       <td> <a href="#"><%= url %></a></td>
+      <td> <form method="POST" action="/urls/9sm5xK/delete"><button color = red></button></form></td>
     </tr>
 
     <% } %>
