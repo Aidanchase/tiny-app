@@ -34,7 +34,7 @@ app.post("/urls", (req, res) => {
 
 app.get("/urls", (req, res) => {
   let templateVars = {
-    username: req.cookies["username"],
+    username: req.cookies["Username:"],
     urls: urlDatabase
   };
 
@@ -44,13 +44,17 @@ app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
 });
 app.get("/urls/new", (req, res) => {
-  res.render("urls_new");
+  let templateVars = {username: req.cookies["Username:"]}
+  res.render("urls_new", templateVars);
 });
 app.post("/login",(req, res) => {
   res.cookie("Username:", req.body.username);
   res.redirect("/urls");
-console.log(cookie
-  )
+})
+
+app.post("/logout", (req, res)=>{
+  res.clearCookie("Username:")
+  res.redirect("/urls")
 })
 app.get("/hello", (req, res) => {
   res.send("<html><body>Hello <b>World</b></body></html>\n");
@@ -61,7 +65,7 @@ app.post("/urls/:shortURL/delete", (req, res) => {
 });
 app.get("/urls/:shortURL", (req, res) => {
   let templateVars = {
-    username: req.cookies["username"],
+    username: req.cookies["Username:"],
     shortURL: req.params.shortURL,
     longURL: urlDatabase[req.params.shortURL]
   };
