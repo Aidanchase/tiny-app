@@ -6,13 +6,16 @@
 
 <body bgcolor = skyblue>
     <% include ./partials/_header %>
-    <table>
+    <table bgcolor = lightpink>
         <tr>
             <td>
                 <a href="#"> <%=longURL%> </a>
             </td>
             <td> <a href="#"> <%=shortURL%> </td>
         </tr>
+        <tr>
+        <form method="POST" action="/urls/<%= shortURL %>"><input type = "text" name = "longURL" placeholder = "Enter updated URL"><button>Update</button></input> </form>
+        </td>
     </table>
 
 
