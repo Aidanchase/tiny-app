@@ -1,11 +1,12 @@
+<h1>TinyApp!</h1>
 
-        <h1>TinyApp!</h1>
-        
-        <h2><a href="#"> Create your own very small URLOL</a></h2>
-       <% if (username) { %>
-        <h3> Welcome <%=username%>!</h3>
-        <form method="POST"  action="/logout"><input type = "hidden"  name = "logout" placeholder = "Click to logout"> </input><button> Logout </button></form>
-        <% } %>
-        <% if (!username) {%>
-        <form method="POST"  action="/login"><input type = "text"  name = "username" placeholder = "Enter Username"> </input> <button> Login </button></form>
-        <% } %>
+<h2><a href="#"> Create your own very small URLOL</a></h2>
+<% if (username) { %>
+<h3> Welcome <%=username%>!</h3>
+<form method="POST" action="/logout"><input type="hidden" name="logout" placeholder="Click to logout"> </input><button>
+                Logout </button></form>
+<% } %>
+<% if (!username) {%>
+<form method="POST" action="/login"><input type="text" name="username" placeholder="Enter Username"> </input> <button>
+                Login </button></form>
+<% } %>
