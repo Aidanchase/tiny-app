@@ -7,12 +7,12 @@
         <tbody>
             <tr bgcolor="lightpink">
                 <td>
-                    <a href="#"> <%=longURL%> </a>
+                    <a href="#"> <%=longVersion.longURL%> </a>
                 </td>
-                <td> <a href="#"> <%=shortURL%> </td>
+                <td> <a href="#"> <%=shortVersion%> </td>
             </tr>
             <tr>
-                <form method="POST" action="/urls/<%= shortURL %>"><input type="text" name="longURL"
+                <form method="POST" action="/urls/<%= shortVersion %>"><input type="text" name="longURL"
                         placeholder="Enter updated URL"><button>Update</button></input> </form>
                 </td>
         </tbody>
