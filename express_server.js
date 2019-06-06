@@ -29,12 +29,12 @@ app.listen(PORT, () => {
   console.log(`TinyApp listening on port ${PORT}!`);
 });
 app.get("/", (req, res) => {
-  res.cookie("email", req.cookies["email"])
+  res.cookie("user_id", req.cookies["user_id"])
   res.render("login_page");
 });
 app.get("/urls", (req, res) => {
   let templateVars = {
-    email: req.cookies["email"],
+    email: req.cookies["user_id"],
     urls: urlDatabase
   };
   app.post("/urls", (req, res) => {
@@ -54,7 +54,7 @@ app.get("/urls.json", (req, res) => {
 });
 app.get("/urls/new", (req, res) => {
   let templateVars = {
-    email: req.cookies["email"]
+    email: req.cookies["user_id"]
   }
   res.render("urls_new", templateVars);
 });
@@ -62,13 +62,12 @@ app.get("/login", (req, res) => {
   res.render("login_page")
 })
 app.post("/login", (req, res) => {
-  res.cookie("email", req.body.email);
-  res.cookie("password", req.body.password)
+  res.cookie("user_id", req.body.email);
   res.redirect("/urls");
 })
 
 app.post("/logout", (req, res) => {
-  res.clearCookie("email")
+  res.clearCookie("user_id")
   res.clearCookie("password")
   res.redirect("/")
 })
@@ -77,13 +76,13 @@ app.get("/register", (req, res) => {
 })
 app.post("/register", (req, res) =>{ 
 const randomID = generateRandomString(8, "123456789abcdefghijklmnopqrstuvwxyz")
-
 users[randomID] = {
   id: randomID,
   email: req.body.email,
   password: req.body.password,
 }
 res.cookie("user_id", randomID);
+
 res.redirect("/urls");
 })
 app.post("/urls/:shortURL/delete", (req, res) => {
@@ -92,7 +91,7 @@ app.post("/urls/:shortURL/delete", (req, res) => {
 });
 app.get("/urls/:shortURL", (req, res) => {
   let templateVars = {
-    email: req.cookies["email"],
+    email: req.cookies["user_id"],
     shortURL: req.params.shortURL,
     longURL: urlDatabase[req.params.shortURL]
   };
