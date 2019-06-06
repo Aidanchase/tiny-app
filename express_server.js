@@ -25,20 +25,20 @@ app.listen(PORT, () => {
 app.get("/", (req, res) => {
   res.send("Hello!");
 });
-app.post("/urls", (req, res) => {
-  let randomString = generateRandomString(
-    "6",
-    "123456789abcdefghijklmnopqrstuvwxyz"
-  );
-  urlDatabase[randomString] = req.body.longURL;
-  res.redirect(`/urls/${randomString}`);
-});
-
 app.get("/urls", (req, res) => {
   let templateVars = {
     username: req.cookies["Username:"],
     urls: urlDatabase
   };
+  app.post("/urls", (req, res) => {
+    let randomString = generateRandomString(
+      "6",
+      "123456789abcdefghijklmnopqrstuvwxyz"
+    );
+    urlDatabase[randomString] = req.body.longURL;
+    res.redirect(`/urls/${randomString}`);
+  });
+
 
   res.render("urls_index", templateVars);
 });
