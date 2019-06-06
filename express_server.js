@@ -83,9 +83,7 @@ users[randomID] = {
   email: req.body.email,
   password: req.body.password,
 }
-console.log(users);
-res.cookie("email", req.body.email);
-res.cookie("password", req.body.password);
+res.cookie("user_id", randomID);
 res.redirect("/urls");
 })
 app.post("/urls/:shortURL/delete", (req, res) => {
