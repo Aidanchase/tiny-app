@@ -76,8 +76,17 @@ app.get("/register", (req, res) => {
   res.render("registration_page");
 })
 app.post("/register", (req, res) =>{ 
-res.cookie("email", req.body.email)
-res.cookie("password", req.body.password)
+const randomID = generateRandomString(8, "123456789abcdefghijklmnopqrstuvwxyz")
+
+users[randomID] = {
+  id: randomID,
+  email: req.body.email,
+  password: req.body.password,
+}
+console.log(users);
+res.cookie("email", req.body.email);
+res.cookie("password", req.body.password);
+res.redirect("/urls");
 })
 app.post("/urls/:shortURL/delete", (req, res) => {
   delete urlDatabase[req.params.shortURL];
