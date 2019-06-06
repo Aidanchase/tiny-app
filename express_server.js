@@ -9,16 +9,22 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 
+const urlDatabase = {
+  b2xVn2: "http://www.lighthouselabs.ca",
+  "9sm5xK": "http://www.google.com"
+};
+
+const users =  {
+}
+
 function generateRandomString(length, chars) {
   let result = "";
   for (var i = length; i > 0; --i)
     result += chars[Math.floor(Math.random() * chars.length)];
   return result;
 }
-const urlDatabase = {
-  b2xVn2: "http://www.lighthouselabs.ca",
-  "9sm5xK": "http://www.google.com"
-};
+
+
 app.listen(PORT, () => {
   console.log(`TinyApp listening on port ${PORT}!`);
 });
@@ -66,12 +72,12 @@ app.post("/logout", (req, res) => {
   res.clearCookie("password")
   res.redirect("/")
 })
-app.get("/signup", (req, res) => {
+app.get("/register", (req, res) => {
   res.render("registration_page");
 })
-app.post("/signup", (req, res) =>{
+app.post("/register", (req, res) =>{ 
 res.cookie("email", req.body.email)
-res.charset("password", req.body.password)
+res.cookie("password", req.body.password)
 })
 app.post("/urls/:shortURL/delete", (req, res) => {
   delete urlDatabase[req.params.shortURL];
@@ -93,3 +99,4 @@ app.post("/urls/:id", (req, res) => {
   urlDatabase[req.params.id] = req.body.longURL;
   res.redirect("/urls");
 });
+
