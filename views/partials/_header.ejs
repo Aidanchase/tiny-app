@@ -1,12 +1,23 @@
-<h1>TinyApp!</h1>
+<head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+                integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+                crossorigin="anonymous">
+        </header>
 
-<h2><a href="#"> Create your own very small URLOL</a></h2>
-<% if (username) { %>
-<h3> Welcome <%=username%>!</h3>
-<form method="POST" action="/logout"><input type="hidden" name="logout" placeholder="Click to logout"> </input><button>
-                Logout </button></form>
-<% } %>
-<% if (!username) {%>
-<form method="POST" action="/login"><input type="text" name="username" placeholder="Enter Username"> </input> <button>
-                Login </button></form>
-<% } %>
+<body>
+        <div class="jumbotron" background-color="#E4D8B4" !important>
+                <h1 class="text-center" s><strong>TinyApp!</strong></h1>
+        </div>
+        <p class="text-center"><a href="#"> Create your own very, very small URL</a></p>
+        <% if (username) { %>
+        <h3 class="text-center"> Welcome <%=username%>!</h3>
+
+        <form method="POST" action="/logout"><input type="hidden" name="logout" placeholder="Click to logout">
+                </input><button class="btn btn-danger"> Logout </button></form>
+        <% } %>
+
+        <% if (!username) {%>
+        <form class="form-horizontal" method="POST" action="/login"><input type="text" name="username"
+                        placeholder="Enter Username"> </input> <button class="btn btn-primary btn-lg">
+                        Login </button></form>
+        <% } %>

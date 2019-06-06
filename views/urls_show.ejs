@@ -2,20 +2,28 @@
 <html>
 
 <head>
+    <style>
+        body {
+            background-color: #E4D8B4;
+        }
+    </style>
 </head>
 
-<body bgcolor = skyblue>
+<body>
     <% include ./partials/_header %>
-    <table bgcolor = lightpink>
-        <tr>
-            <td>
-                <a href="#"> <%=longURL%> </a>
-            </td>
-            <td> <a href="#"> <%=shortURL%> </td>
-        </tr>
-        <tr>
-        <form method="POST" action="/urls/<%= shortURL %>"><input type = "text" name = "longURL" placeholder = "Enter updated URL"><button>Update</button></input> </form>
-        </td>
+    <table class="table table-hover" bgcolor="skyblue">
+        <tbody>
+            <tr bgcolor="lightpink">
+                <td>
+                    <a href="#"> <%=longURL%> </a>
+                </td>
+                <td> <a href="#"> <%=shortURL%> </td>
+            </tr>
+            <tr>
+                <form method="POST" action="/urls/<%= shortURL %>"><input type="text" name="longURL"
+                        placeholder="Enter updated URL"><button>Update</button></input> </form>
+                </td>
+        </tbody>
     </table>
 
 
