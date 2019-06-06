@@ -57,17 +57,22 @@ app.get("/login", (req, res) => {
 })
 app.post("/login", (req, res) => {
   res.cookie("email", req.body.email);
+  res.cookie("password", req.body.password)
   res.redirect("/urls");
 })
 
 app.post("/logout", (req, res) => {
   res.clearCookie("email")
+  res.clearCookie("password")
   res.redirect("/")
 })
 app.get("/signup", (req, res) => {
   res.render("registration_page");
 })
-
+app.post("/signup", (req, res) =>{
+res.cookie("email", req.body.email)
+res.charset("password", req.body.password)
+})
 app.post("/urls/:shortURL/delete", (req, res) => {
   delete urlDatabase[req.params.shortURL];
   res.redirect("/urls");
