@@ -23,11 +23,12 @@ app.listen(PORT, () => {
   console.log(`TinyApp listening on port ${PORT}!`);
 });
 app.get("/", (req, res) => {
-  res.send("Hello!");
+  res.cookie("email", req.cookies["email"])
+  res.render("login_page");
 });
 app.get("/urls", (req, res) => {
   let templateVars = {
-    username: req.cookies["Username:"],
+    email: req.cookies["email"],
     urls: urlDatabase
   };
   app.post("/urls", (req, res) => {
@@ -47,29 +48,33 @@ app.get("/urls.json", (req, res) => {
 });
 app.get("/urls/new", (req, res) => {
   let templateVars = {
-    username: req.cookies["Username:"]
+    email: req.cookies["email"]
   }
   res.render("urls_new", templateVars);
 });
+app.get("/login", (req, res) => {
+  res.render("login_page")
+})
 app.post("/login", (req, res) => {
-  res.cookie("Username:", req.body.username);
+  res.cookie("email", req.body.email);
   res.redirect("/urls");
 })
 
 app.post("/logout", (req, res) => {
-  res.clearCookie("Username:")
-  res.redirect("/urls")
+  res.clearCookie("email")
+  res.redirect("/")
 })
-app.get("/hello", (req, res) => {
-  res.send("<html><body>Hello <b>World</b></body></html>\n");
-});
+app.get("/signup", (req, res) => {
+  res.render("registration_page");
+})
+
 app.post("/urls/:shortURL/delete", (req, res) => {
   delete urlDatabase[req.params.shortURL];
   res.redirect("/urls");
 });
 app.get("/urls/:shortURL", (req, res) => {
   let templateVars = {
-    username: req.cookies["Username:"],
+    email: req.cookies["email"],
     shortURL: req.params.shortURL,
     longURL: urlDatabase[req.params.shortURL]
   };
