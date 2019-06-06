@@ -31,6 +31,7 @@ function emailLookup(email){
  }
 }
 
+
 app.listen(PORT, () => {
   console.log(`TinyApp listening on port ${PORT}!`);
 });
@@ -39,10 +40,15 @@ app.get("/", (req, res) => {
   res.render("login_page");
 });
 app.get("/urls", (req, res) => {
-  let templateVars = {
-    email: req.cookies["user_id"],
+const user_id = req.cookies["user_id"];
+  
+let templateVars = {
+    user: users[user_id],
     urls: urlDatabase
+    
   };
+  res.render("urls_index", templateVars);
+})
   app.post("/urls", (req, res) => {
     let randomString = generateRandomString(
       "6",
@@ -52,24 +58,35 @@ app.get("/urls", (req, res) => {
     res.redirect(`/urls/${randomString}`);
   });
 
-
-  res.render("urls_index", templateVars);
-});
 app.get("/urls.json", (req, res) => {
+  const user_id = req.cookies["user_id"];
   res.json(urlDatabase);
 });
 app.get("/urls/new", (req, res) => {
+  const user_id = req.cookies["user_id"];
+  
   let templateVars = {
-    users
+    user: users[user_id]
   }
   res.render("urls_new", templateVars);
 });
 app.get("/login", (req, res) => {
+  const user_id = req.cookies["user_id"];
   res.render("login_page")
 })
 app.post("/login", (req, res) => {
-  res.cookie("user_id", req.body.email);
+  const randomID = generateRandomString(8, "123456789abcdefghijklmnopqrstuvwxyz");
+  if  (emailLookup(req.body.email)){
+    users[randomID] = {
+    id: randomID,
+    email: req.body.email,
+    password: req.body.password,
+  }  
+  res.cookie("user_id", randomID, );
   res.redirect("/urls");
+  } else {
+    res.status(400).send("You don't have an account yet.")
+  }
 })
 
 app.post("/logout", (req, res) => {
@@ -102,11 +119,15 @@ app.get("/urls/:shortURL", (req, res) => {
   let templateVars = {
     email: req.cookies["user_id"],
     shortURL: req.params.shortURL,
-    longURL: urlDatabase[req.params.shortURL]
+    longURL: urlDatabase[req.params.shortURL],
+    users: users,
+    userIDS: req.cookies["user_id"],
+   
   };
   res.render("urls_show", templateVars);
 });
 app.get("/u/:shortURL", (req, res) => {
+  const user_id = req.cookies["user_id"];
   const longURL = urlDatabase[req.params.shortURL];
   res.redirect(longURL);
 });

@@ -6,20 +6,17 @@
         <link rel="stylesheet" href="./tiny-app-style.css">
 </head>
 
-<body class="body">
+<body>
         <div class="jumbotron">
                 <h1 class="text-center"><strong>TinyApp!</strong></h1>
         </div>
-        <% if (email) { %>
+        <% if (user) { %>
         <form method="POST" action="/logout"><input type="hidden" name="logout" placeholder="Click to logout">
                 </input><button class="btn btn-danger btn-lg"> Logout </button></form>
-        <% } %>
-        <% if (!email) {%>
-        <form class="form-horizontal" method="POST" action="/login"><input type="text" name="email"
-                        placeholder="Enter your email"> </input> <button class="btn btn-primary btn-lg">
-                        Login </button></form>
-        <% } %>
+
+
         </div>
         <p class="text-center"><a href="http://localhost:8080/urls/new"> Create your own very, very small URL</a></p>
 
-        <h3 class="text-center"> Welcome <%=email%> !</h3>
+        <h3 class="text-center"> Welcome <%=user.email%>!</h3>
+        <%  } %>
