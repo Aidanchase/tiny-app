@@ -41,8 +41,7 @@ app.get("/", (req, res) => {
 });
 app.get("/urls", (req, res) => {
 const user_id = req.cookies["user_id"];
-  
-let templateVars = {
+    let templateVars = {
     user: users[user_id],
     urls: urlDatabase
     
@@ -63,8 +62,10 @@ app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
 });
 app.get("/urls/new", (req, res) => {
+  if (!req.cookies){
+    res.redirect("/login")
+  }
   const user_id = req.cookies["user_id"];
-  
   let templateVars = {
     user: users[user_id]
   }
@@ -90,9 +91,9 @@ app.post("/login", (req, res) => {
 })
 
 app.post("/logout", (req, res) => {
-  res.clearCookie("user_id")
-  res.clearCookie("password")
-  res.redirect("/")
+  res.clearCookie("user_id");
+  res.clearCookie("password");
+  res.redirect("/");
 })
 app.get("/register", (req, res) => {
   res.render("registration_page");
