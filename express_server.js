@@ -73,7 +73,6 @@ app.get("/urls", (req, res) => {
     urlDatabase[randomString] = {};
     urlDatabase[randomString]["longURL"] = req.body.longURL;
     urlDatabase[randomString]["userID"]  = currentUser;
-    console.log(urlDatabase[randomString])
     res.redirect(`/urls/${randomString}`);
     
   });
@@ -90,7 +89,6 @@ app.get("/urls/new", (req, res) => {
   let templateVars = {
     user: users[user_id]
   }
-  console.log("This function(URLS NEW) has been called");
   res.render("urls_new", templateVars);
 });
 app.get("/login", (req, res) => {
@@ -135,8 +133,12 @@ users[randomID] = {
   }
 })
 app.post("/urls/:shortURL/delete", (req, res) => {
+  if (!req.cookies["user_id"]){
+    res.redirect("/login");
+  } else {
   delete urlDatabase[req.params.shortURL];
   res.redirect("/urls");
+}
 });
 app.get("/urls/:shortURL", (req, res) => {
   const user_id = req.cookies["user_id"];
@@ -145,13 +147,11 @@ app.get("/urls/:shortURL", (req, res) => {
     longVersion: urlDatabase[req.params.shortURL],
     user: users[user_id]
   };
-  console.log("This function(URLS show) has been called");
   res.render("urls_show", templateVars);
 });
-app.get("/u/:shortURL", (req, res) => {
-  const user_id = req.cookies["user_id"];
-  const longURL = urlDatabase[req.params.shortURL];
-  res.redirect(longURL);
+app.get("/u/:shortURL", (req, res) => {;
+  const longURL = urlDatabase[req.params.shortURL].longURL;
+  res.redirect(`${longURL}`)
 });
 app.post("/urls/:id", (req, res) => {
   const user_id = req.cookies["user_id"];
@@ -161,4 +161,4 @@ app.post("/urls/:id", (req, res) => {
   urlDatabase[req.params.id]["longURL"] = req.body.longURL;
   res.redirect("/urls");
 });
-// console.log(urlDatabase);
+
