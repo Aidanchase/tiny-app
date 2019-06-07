@@ -10,8 +10,8 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 
 const urlDatabase = {
-  "b2xVn2": {longURL:"http://www.lighthouselabs.ca"},
-  "9sm5xK": {longURL: "http://www.google.com"} 
+  "b2xVn2": {longURL:"http://www.lighthouselabs.ca", userID:"hhhh1"},
+  "9sm5xK": {longURL: "http://www.google.com" , userID:"hhhh1"} 
 }
 
 const users = {};
@@ -32,18 +32,18 @@ function emailLookup(email){
 }
 
 const urlsForUser = function(id){
-  const userURLS  = {}
+  const userURLS  = {};
   for (let i in urlDatabase){
-      
-     if (urlDatabase[i].userID === id){ 
-      userURLS["userID"] = id; 
+    if (urlDatabase[i].userID === id){ 
+    userURLS["userID"] = id; 
      userURLS["shortURL"] = urlDatabase 
-        userURLS["longURL"] = urlDatabase[i].longURL; 
+        // userURLS["longURL"] = urlDatabase[i].longURL; 
    } 
      return userURLS; 
  } 
 } 
-urlsForUser(id);
+
+
 
 
 app.listen(PORT, () => {
