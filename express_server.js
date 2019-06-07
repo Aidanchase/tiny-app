@@ -3,12 +3,18 @@ let app = express();
 let PORT = 8080; // default port 8080
 app.set("view engine", "ejs");
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
+const  cookieSession = require("cookie-session");
+const bcrypt = require("bcrypt");
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(cookieParser());
-const bcrypt = require("bcrypt");
+app.use(cookieSession({
+  name: "session",
+  keys: ["key1", "key2"],
+
+  maxAge: 24 * 60 * 60 * 1000
+}));
 
 const urlDatabase = {
   "b2xVn2": {
@@ -59,27 +65,26 @@ app.listen(PORT, () => {
   console.log(`TinyApp listening on port ${PORT}!`);
 });
 app.get("/", (req, res) => {
-  res.cookie("user_id", req.cookies["user_id"])
   res.render("login_page");
 });
 app.get("/urls", (req, res) => { //get and render unique user index page
-  if (users[req.cookies["user_id"]]) {
-    const user_id = req.cookies["user_id"];
+  const user_id = req.session.user_id;
+  if (users[req.session.user_id]) {
     let templateVars = {
       user: users[user_id],
       urls: urlsForUser(user_id)
     }
     res.render("urls_index", templateVars);
-  } else if (!res.cookies) {
+  } else if (!req.session.user_id) {
     res.redirect("/login");
   };
-})
+});
 app.post("/urls", (req, res) => { // adds user generated urls to url DB
   let randomString = generateRandomString(
     "6",
     "123456789abcdefghijklmnopqrstuvwxyz"
   );
-  const currentUser = req.cookies["user_id"];
+  const currentUser = req.session.user_id;
   urlDatabase[randomString] = {};
   urlDatabase[randomString]["longURL"] = req.body.longURL;
   urlDatabase[randomString]["userID"] = currentUser;
@@ -88,21 +93,20 @@ app.post("/urls", (req, res) => { // adds user generated urls to url DB
 });
 
 app.get("/urls.json", (req, res) => { //json object of urls
-  const user_id = req.cookies["user_id"];
   res.json(urlDatabase);
 });
 app.get("/urls/new", (req, res) => {
-  if (!req.cookies) {
+  if (!req.session.user_id) {
     res.redirect("/login")
   }
-  const user_id = req.cookies["user_id"];
+  const user_id = req.session.user_id;
   let templateVars = {
     user: users[user_id]
   }
   res.render("urls_new", templateVars);
 });
 app.get("/login", (req, res) => {
-  const user_id = req.cookies["user_id"];
+  const user_id = req.session.user_id;
   res.render("login_page")
 })
 app.post("/login", (req, res) => { // user email and password in database checked against input
@@ -110,16 +114,14 @@ app.post("/login", (req, res) => { // user email and password in database checke
   const userId = emailLookup(req.body.email)
   console.log("user id:", userId)
   if (userId && bcrypt.compareSync(password, users[userId].password)) {
-    res.cookie("user_id", userId);
+    req.session.user_id = userId;
     res.redirect("/urls");
   } else {
     res.status(400).send("You don't have an account yet.")
   }
 });
-
 app.post("/logout", (req, res) => { //clear user info on logout
-  res.clearCookie("user_id");
-  res.clearCookie("password");
+  req.session.user_id = null;
   res.redirect("/");
 })
 app.get("/register", (req, res) => {
@@ -138,12 +140,12 @@ app.post("/register", (req, res) => { // user info logged on register, password 
       password: hashedPassword,
     }
 
-    res.cookie("user_id", randomID);
+    req.session.user_id = randomID;
     res.redirect("/urls");
   }
 })
 app.post("/urls/:shortURL/delete", (req, res) => { //delete user short urls
-  if (!req.cookies["user_id"]) {
+  if (!req.session.user_id) {
     res.redirect("/login");
   } else {
     delete urlDatabase[req.params.shortURL];
@@ -151,7 +153,7 @@ app.post("/urls/:shortURL/delete", (req, res) => { //delete user short urls
   }
 });
 app.get("/urls/:shortURL", (req, res) => { //show individual short urls
-  const user_id = req.cookies["user_id"];
+  const user_id = req.session.user_id;
   let templateVars = {
     shortVersion: req.params.shortURL,
     longVersion: urlDatabase[req.params.shortURL],
@@ -165,8 +167,8 @@ app.get("/u/:shortURL", (req, res) => {
   res.redirect(`${longURL}`)
 });
 app.post("/urls/:id", (req, res) => { //redirects  to login if there is no user id present
-  const user_id = req.cookies["user_id"];
-  if (!req.cookies["user_id"]) {
+  const user_id = req.session.user_id;
+  if (!user_id) {
     res.redirect("/login");
   }
   urlDatabase[req.params.id]["longURL"] = req.body.longURL;
