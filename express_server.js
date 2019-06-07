@@ -11,7 +11,8 @@ app.use(cookieParser());
 
 const urlDatabase = {
   "b2xVn2": {longURL:"http://www.lighthouselabs.ca", userID:"hhhh1"},
-  "9sm5xK": {longURL: "http://www.google.com" , userID:"hhhh1"} 
+  "9sm5xK": {longURL: "http://www.google.com" , userID:"hhhh1"},
+  "8oondn": {longURL: "http://www.reddit.com", userID:  "hhjsjs"}
 }
 
 const users = {};
@@ -35,12 +36,10 @@ const urlsForUser = function(id){
   const userURLS  = {};
   for (let i in urlDatabase){
     if (urlDatabase[i].userID === id){ 
-    userURLS["userID"] = id; 
-     userURLS["shortURL"] = urlDatabase 
-        // userURLS["longURL"] = urlDatabase[i].longURL; 
-   } 
-     return userURLS; 
- } 
+      userURLS[i] = urlDatabase[i]; 
+    } 
+  } 
+ return userURLS; 
 } 
 
 
@@ -57,8 +56,8 @@ app.get("/urls", (req, res) => {
   if(users[req.cookies["user_id"]]){
     const user_id = req.cookies["user_id"];
     let templateVars = {
-    user: users[user_id],
-    urls: urlDatabase
+      user: users[user_id],
+      urls: urlsForUser(user_id)
     }
     res.render("urls_index", templateVars);
   } else if (!res.cookies){
@@ -155,6 +154,10 @@ app.get("/u/:shortURL", (req, res) => {
   res.redirect(longURL);
 });
 app.post("/urls/:id", (req, res) => {
+  const user_id = req.cookies["user_id"];
+  if(!req.cookies["user_id"]){
+    res.redirect("/login");
+  }
   urlDatabase[req.params.id]["longURL"] = req.body.longURL;
   res.redirect("/urls");
 });
