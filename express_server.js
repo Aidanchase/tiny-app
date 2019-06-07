@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(cookieParser());
+const bcrypt = require("bcrypt");
 
 const urlDatabase = {
   "b2xVn2": {
@@ -90,7 +91,7 @@ app.get("/urls.json", (req, res) => { //json object of urls
   const user_id = req.cookies["user_id"];
   res.json(urlDatabase);
 });
-app.get("/urls/new", (req, res) => { 
+app.get("/urls/new", (req, res) => {
   if (!req.cookies) {
     res.redirect("/login")
   }
@@ -104,20 +105,17 @@ app.get("/login", (req, res) => {
   const user_id = req.cookies["user_id"];
   res.render("login_page")
 })
-app.post("/login", (req, res) => {
-  const randomID = generateRandomString(8, "123456789abcdefghijklmnopqrstuvwxyz"); //login or redirect to signup
-  if (emailLookup(req.body.email)) {
-    users[randomID] = {
-      id: randomID,
-      email: req.body.email,
-      password: req.body.password,
-    }
-    res.cookie("user_id", randomID, );
+app.post("/login", (req, res) => { // user email and password in database checked against input
+  const password = req.body.password
+  const userId = emailLookup(req.body.email)
+  console.log("user id:", userId)
+  if (userId && bcrypt.compareSync(password, users[userId].password)) {
+    res.cookie("user_id", userId);
     res.redirect("/urls");
   } else {
     res.status(400).send("You don't have an account yet.")
   }
-})
+});
 
 app.post("/logout", (req, res) => { //clear user info on logout
   res.clearCookie("user_id");
@@ -127,7 +125,9 @@ app.post("/logout", (req, res) => { //clear user info on logout
 app.get("/register", (req, res) => {
   res.render("registration_page");
 })
-app.post("/register", (req, res) => { // user info logged on register
+app.post("/register", (req, res) => { // user info logged on register, password hashed and random  id set.
+  const password = req.body.password;
+  const hashedPassword = bcrypt.hashSync(password, 10);
   const randomID = generateRandomString(8, "123456789abcdefghijklmnopqrstuvwxyz");
   if (req.body.email === "" || req.body.password === "" || emailLookup(req.body.email)) {
     res.status(400).send("Please enter your info or check that you're not already registered");
@@ -135,8 +135,9 @@ app.post("/register", (req, res) => { // user info logged on register
     users[randomID] = {
       id: randomID,
       email: req.body.email,
-      password: req.body.password,
+      password: hashedPassword,
     }
+
     res.cookie("user_id", randomID);
     res.redirect("/urls");
   }
