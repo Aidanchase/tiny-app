@@ -1,0 +1,15 @@
+<%const urlsForUser = function(id){
+  const userURLS  = {}
+  for (let i in urlDatabase){
+      %>
+    <% if (urlDatabase[i].userID === id){ %>
+     <%= userURLS["userID"] = id; %>
+    <%=  userURLS["shortURL"] = urlDatabase %>
+      <% = userURLS["longURL"] = urlDatabase[i].longURL; %>
+  <%  } %>
+    <% return userURLS; %>
+ <% } %>
+<% } %>
+urlsForUser(id);
+%>
+

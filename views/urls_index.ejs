@@ -10,27 +10,21 @@
 
 <body>
   <% include ./partials/_header %>
-  <% function urlsForUser(user_id){%>
-      
-  <%  }  %>
-   <% return userURLS; %>
-
 
   <div class="table-responsive">
     <table class="table table-hover " bgcolor="skyblue">
       <th bgcolor="skyblue"> YOU ARE ELLS</th>
       <th bgcolor="skyblue"> Shortened! </th>
-      <% for(let url in userURLS) { %>
+      <% for(let url in urls) { %>
       <tbody>
         <tr bgcolor="pink">
-          <td> <%=url%> ----> <a href="<%=urls[url]%>"><%= userURLS[url].longURL %></a></td>
+          <td> <%=url%> ----> <a href="<%=urls[url]%>"><%= urls[url].longURL %></a></td>
           <td> <a href="/urls/<%= url %>"> Edit </a></td>
           <td>
             <form method="POST" action="/urls/<%= url %>/delete"><button class="btn btn-danger btn-lg">Delete</button>
             </form>
           </td>
         </tr>
-
         <% } %>
       </tbody>
     </table>

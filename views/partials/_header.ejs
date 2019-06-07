@@ -3,7 +3,6 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
                 integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
                 crossorigin="anonymous">
-        <link rel="stylesheet" href="./tiny-app-style.css">
 </head>
 
 <body>
@@ -13,10 +12,7 @@
         <% if (user) { %>
         <form method="POST" action="/logout"><input type="hidden" name="logout" placeholder="Click to logout">
                 </input><button class="btn btn-danger btn-lg"> Logout </button></form>
-
-
         </div>
         <p class="text-center"><a href="http://localhost:8080/urls/new"> Create your own very, very small URL</a></p>
-
         <h3 class="text-center">Logged in as <%=user.email%>!</h3>
         <%  } %>
