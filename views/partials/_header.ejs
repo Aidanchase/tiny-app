@@ -10,9 +10,11 @@
                 <h1 class="text-center"><strong>TinyApp!</strong></h1>
         </div>
         <% if (user) { %>
+        <div class = "btn-group">
         <form method="POST" action="/logout"><input type="hidden" name="logout" placeholder="Click to logout">
-                </input><button class="btn btn-danger btn-lg"> Logout </button></form>
+                </input><button class="btn btn-danger btn-lg" > Logout </button></form>
+
         </div>
-        <p class="text-center"><a href="http://localhost:8080/urls/new"> Create your own very, very small URL</a></p>
-        <h3 class="text-center">Logged in as <%=user.email%>!</h3>
+        <p class="text-center"><a href="http://localhost:8080/urls/new" class ="text-info"> Create your own very, very small URL</a></p>
+        <h3 class="text-center text-dark">Logged in as <%=user.email%>!</h3>
         <%  } %>

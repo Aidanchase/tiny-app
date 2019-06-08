@@ -18,8 +18,8 @@
       <% for(let url in urls) { %>
       <tbody>
         <tr bgcolor="pink">
-          <td> <%=url%> ----> <a href="<%=urls[url]%>"><%= urls[url].longURL %></a></td>
-          <td> <a href="/urls/<%= url %>"> Edit </a></td>
+          <td> <a href = "<%=urls[url].longURL%>" class = "text-dark"><%=url%> ----> </a> <a href="<%=urls[url].longURL%>" class = "text-dark"><%= urls[url].longURL %></a></td>
+          <td> <a href="/urls/<%= url %>" class ="text-dark"> Edit </a></td>
           <td>
             <form method="POST" action="/urls/<%= url %>/delete"><button class="btn btn-danger btn-lg">Delete</button>
             </form>

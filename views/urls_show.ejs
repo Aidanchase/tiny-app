@@ -7,9 +7,9 @@
         <tbody>
             <tr bgcolor="lightpink">
                 <td>
-                    <a href="<%=urls[shortVersion].longURL%>"> <%=longVersion.longURL %> -----------> </a>
+                    <a href="<%=urls[shortVersion].longURL%>" class = "text-dark"> <%=longVersion.longURL %> -----------> </a>
                 </td>
-                <td> <a href="<%=urls[shortVersion].longURL%>"> <%=shortVersion%> </td>
+                <td> <a href="<%=urls[shortVersion].longURL%>" class = "text-dark"> <%=shortVersion%> </td>
             </tr>
             <tr>
                 <form method="POST" action="/urls/<%= shortVersion %>"><input type="text" name="longURL"
