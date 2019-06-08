@@ -2,8 +2,17 @@
 
 Tiny app is a full stack web application built with  node and express to create the tiniest of URLS.
 
-### screenshots coming soon once styling is complete.
+### screenshots
+docs/new-url-page.png
+- https://github.com/Aidanchase/tiny-app/blob/master/docs/new-url-page.png?raw=true
 
+- https://github.com/Aidanchase/tiny-app/blob/master/docs/new-url-page.png?raw=true
+
+- https://github.com/Aidanchase/tiny-app/blob/master/docs/register-page.png?raw=true
+
+- https://github.com/Aidanchase/tiny-app/blob/master/docs/update-page.png?raw=true
+
+- https://github.com/Aidanchase/tiny-app/blob/master/docs/url-index.png?raw=true
 ## Dependencies
 ### A huge thanks to Lighthouse Labs for making big urls tiny again.
 - Node
