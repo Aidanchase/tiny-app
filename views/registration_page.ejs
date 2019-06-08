@@ -1,38 +1,65 @@
 <!doctype html>
 <html>
+
 <head>
-  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Diplomata' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Fredericka the Great' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Bungee Shade' rel='stylesheet'>
     <style>
-        body         { padding-top:80px; }
+        body {
+            padding-top: 80px;
+        }
+
+        #signup {
+            font-family: "Diplomata";
+        }
+
+        #email {
+            font-family: "Fredericka the Great";
+        }
+
+        #password {
+            font-family: "Fredericka the Great";
+        }
+
+        #register {
+            font-family: "Fredericka the Great";
+        }
+
+        #have-one {
+            font-family: "Fredericka the Great";
+        }
+
+        #signin {
+            font-family: "Fredericka the Great";
+        }
     </style>
 </head>
+
 <body>
-<div class="container">
-<div class="col-sm-6 col-sm-offset-3">
+    <div class="container">
+        <div class="col-sm-6 col-sm-offset-3">
 
-    <h1><span class="fa fa-sign-in"></span> Sign Up</h1>
+            <h1><span class="fa fa-sign-in"></span> <span id="signup"> Sign Up</span></h1>
 
-    <!-- LOGIN FORM -->
-    <form action="/register" method="post">
-        <div class="form-group">
-            <label>Enter your email</label>
-            <input type="text" class="form-control" name="email">
-        </div>
-        <div class="form-group">
-            <label> Choose a new password</label>
-            <input type="password" class="form-control" name="password">
-        </div>
+            <!-- LOGIN FORM -->
+            <form action="/register" method="post">
+                <div class="form-group">
+                    <label id="email">Enter your email</label>
+                    <input type="text" class="form-control" name="email">
+                </div>
+                <div class="form-group">
+                    <label id="password"> Choose a new password</label>
+                    <input type="password" class="form-control" name="password">
+                </div>
 
-        <button type="submit" class="btn btn-warning btn-lg">Register</button>
-    </form>
+                <button id="register" type="submit" class="btn btn-dark btn-lg">Register</button>
+            </form>
 
-    <hr>
+            <hr>
 
-    <p>Have an account? <a href="/login">Sign in</a></p
-
-
-</div>
-</div>
-</body>
+            <p id="have-one"> Have an account? <a href="/login">Sign in</a></p </div> </div> </body>

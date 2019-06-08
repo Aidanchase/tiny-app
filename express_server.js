@@ -3,7 +3,7 @@ let app = express();
 let PORT = 8080; // default port 8080
 app.set("view engine", "ejs");
 const bodyParser = require("body-parser");
-const  cookieSession = require("cookie-session");
+const cookieSession = require("cookie-session");
 const bcrypt = require("bcrypt");
 
 app.use(bodyParser.urlencoded({
@@ -65,10 +65,10 @@ app.listen(PORT, () => {
   console.log(`TinyApp listening on port ${PORT}!`);
 });
 app.get("/", (req, res) => {
-  if(users[req.session.user_id]){
+  if (users[req.session.user_id]) {
     res.redirect("/urls");
   } else {
-  res.redirect("/login");
+    res.redirect("/login");
   }
 });
 app.get("/urls", (req, res) => { //get and render unique user index page

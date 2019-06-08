@@ -3,18 +3,42 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
                 integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
                 crossorigin="anonymous">
+        <link href='https://fonts.googleapis.com/css?family=Diplomata' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Fredericka the Great' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Bungee Shade' rel='stylesheet'>
+        <style>
+                body {
+                        background-color: "black" !important;
+                }
+
+                .jumbotron {
+                        font-family: "Diplomata";
+                }
+
+                h4 {
+                        font-family: "Bungee Shade";
+                        font-size: 18px;
+                        backgound-color: "black";
+                }
+
+                p {
+                        font-family: "Fredericka the Great";
+                        font-size: 15px;
+                }
+
+                #logout {
+                        font-family: "Fredericka the Great";
+                }
+        </style>
 </head>
 
 <body>
         <div class="jumbotron">
-                <h1 class="text-center"><strong>TinyApp!</strong></h1>
+                <h1 class="alternate-font display-1 text-center"><strong>!tinyApp!</strong></h1>
         </div>
         <% if (user) { %>
-        <div class = "btn-group">
-        <form method="POST" action="/logout"><input type="hidden" name="logout" placeholder="Click to logout">
-                </input><button class="btn btn-danger btn-lg" > Logout </button></form>
-
-        </div>
-        <p class="text-center"><a href="http://localhost:8080/urls/new" class ="text-info"> Create your own very, very small URL</a></p>
-        <h3 class="text-center text-dark">Logged in as <%=user.email%>!</h3>
+        <h4 class="text-left"><a href="http://localhost:8080/urls/new" class=" mt-4 text-primary"> CREATE YOUR OWN VERY,
+                        VERY SMALL URL</a></h4>
+        <p class="text-left text-dark">LOGGED IN AS <%=user.email.toUpperCase()%>!</p>
         <%  } %>
+</body>

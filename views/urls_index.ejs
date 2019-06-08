@@ -6,29 +6,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link href='https://fonts.googleapis.com/css?family=Diplomata' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Fredericka the Great' rel='stylesheet'>
+  <style>
+    th {
+      font-family: "Diplomata";
+    }
+
+    #short-url {
+      font-family: "Fredericka the Great";
+    }
+
+    #long-url {
+      font-family: "Fredericka the Great";
+    }
+
+    #edit {
+      font-family: "Fredericka the Great";
+    }
+
+    #delete {
+      font-family: "Fredericka the Great";
+    }
+  </style>
 </head>
+<span id="wrapper">
 
-<body>
-  <% include ./partials/_header %>
+  <body>
+    <% include ./partials/_header %>
 
-  <div class="table-responsive">
-    <table class="table table-hover " bgcolor="skyblue">
-      <th bgcolor="skyblue"> YOU ARE ELLS</th>
-      <th bgcolor="skyblue"> Shortened! </th>
-      <% for(let url in urls) { %>
-      <tbody>
-        <tr bgcolor="pink">
-          <td> <a href = "<%=urls[url].longURL%>" class = "text-dark"><%=url%> ----> </a> <a href="<%=urls[url].longURL%>" class = "text-dark"><%= urls[url].longURL %></a></td>
-          <td> <a href="/urls/<%= url %>" class ="text-dark"> Edit </a></td>
-          <td>
-            <form method="POST" action="/urls/<%= url %>/delete"><button class="btn btn-danger btn-lg">Delete</button>
-            </form>
-          </td>
-        </tr>
-        <% } %>
-      </tbody>
-    </table>
-  </div>
-</body>
+    <div class="table-responsive">
+      <table class="table table-borderless " bgcolor="skyblue">
+        <th class="text-center"> YOU ARE ELLS</th>
+        <th class="shortURLS"> Shortened! </th>
+        <% for(let url in urls) { %>
+        <tbody>
+          <tr>
+            <td class="text-center"> <a id="short-url" href="<%=urls[url].longURL%>"
+                class="text-dark"><%=url.toUpperCase()%> ----> </a> <a id="long-url" href="<%=urls[url].longURL%>"
+                class="text-dark"><%= urls[url].longURL %></a></td>
+            <td> <a id="edit" href="/urls/<%= url %>" class="text-dark"> Edit </a></td>
+            <td>
+              <form method="POST" action="/urls/<%= url %>/delete"><button id="delete"
+                  class="btn btn-outline-danger btn-md">Delete</button>
+              </form>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</span>
 
 </html>

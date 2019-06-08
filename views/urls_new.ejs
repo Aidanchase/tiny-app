@@ -2,36 +2,64 @@
 <html lang="en">
 
 <head>
-  <style>
-    body {
-      background-color: #E4D8B4;
-    }
-  </style>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link href='https://fonts.googleapis.com/css?family=Diplomata' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Fredericka the Great' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Bungee Shade' rel='stylesheet'>
+  <style>
+    #create-url {
+      font-family: "Diplomata";
 
+    }
+
+    #enter-a-url {
+      font-family: "Fredericka the Great";
+    }
+
+    #go-home {
+      font-family: "Fredericka the Great";
+
+    }
+
+    #input-form {
+      font-family: "Fredericka the Great";
+    }
+
+    #submit-button {
+      font-family: "Fredericka the Great";
+    }
+  </style>
   <title>TinyApp!</title>
+
 </head>
 
 <body style="font-size:20px">
 
   <% include partials/_header %>
 
-  <h3>Create TinyURL</h3>
-  <form class="form-inline" action="/urls" method="POST">
-    <div class="form-group mb-2">
-      <label for="longURL">Enter a URL:</label>
-      <input class="form-control" type="text" name="longURL" placeholder="http://" style="width: 300px; margin: 1em">
-      
-      <button type="submit" class="btn btn-info btn-lg"> Submit </button>
+  <h4 id="create-url" class="mt-5 text-center">Create TinyURL</h4>
+  <div class="ml-5 pl-5 wrapper">
+    <div class="ml-5 pl-5 container">
+      <form class="ml-5 pl-5 form-inline" action="/urls" method="POST">
+        <div class="form-group pl-5 ml-5 col-md-offset-10">
+          <label id="enter-a-url" class="ml-5 pl-4" for="longURL">Enter a URL:</label>
+          <input id="input-form" class="form-control" type="text" name="longURL" placeholder="http://"
+            style="width: 300px; margin: 1em">
+
+          <button id="submit-button" type="submit" class="btn btn-outline-primary btn-md"> Submit </button>
+        </div>
+    </div>
   </div>
   </form>
-  <form method="GET" action="/urls"><input type="hidden" name = "home" placeholder="Click to go home">
-                </input><button class="btn btn-warning btn-lg"> Phone home </button></form>
+  <form method="GET" action="/urls"><input type="hidden" name="home" placeholder="Click to go home">
+    </input><button id="go-home" class="btn mt-5 btn-space btn-outline-dark btn-lg"> Phone ~/ </button></form>
+  <form method="POST" action="/logout"><input type="hidden" name="logout" placeholder="Click to logout">
+    </input><button id="logout" class="pl-4 pr-4 btn btn-outline-dark btn-lg"> Logout </button></form>
 </body>
 
 </html>

@@ -1,24 +1,52 @@
 <!DOCTYPE html>
 <html>
 
+<head>
+    <style>
+        <link href='https://fonts.googleapis.com/css?family=Diplomata'rel='stylesheet'><link href='https://fonts.googleapis.com/css?family=Fredericka the Great'rel='stylesheet'><link href='https://fonts.googleapis.com/css?family=Bungee Shade'rel='stylesheet'>#enter-update {
+            font-family: "Fredericka the Great";
+        }
+
+        #update {
+            font-family: "Fredericka the Great";
+        }
+
+        #long {
+            font-family: "Fredericka the Great";
+        }
+
+        #short {
+            font-family: "Fredericka the Great";
+        }
+
+        #go-home {
+            font-family: "Fredericka the Great";
+        }
+    </style>
+</head>
+
 <body>
     <% include ./partials/_header %>
-    <table class="table table-hover" bgcolor="skyblue">
+    <table class="table table-hover>
         <tbody>
-            <tr bgcolor="lightpink">
-                <td>
-                    <a href="<%=urls[shortVersion].longURL%>" class = "text-dark"> <%=longVersion.longURL %> -----------> </a>
-                </td>
-                <td> <a href="<%=urls[shortVersion].longURL%>" class = "text-dark"> <%=shortVersion%> </td>
-            </tr>
-            <tr>
-                <form method="POST" action="/urls/<%= shortVersion %>"><input type="text" name="longURL"
-                        placeholder="Enter updated URL"><button class = "btn-info btn-lg">Update</button></input> </form>
-                </td>
-        </tbody>
+            <tr bgcolor=" lightpink">
+        <td>
+            <a id="long" href="<%=urls[shortVersion].longURL%>" class="link text-dark"> <%=longVersion.longURL %>
+                ----------->
+            </a>
+        </td>
+        <td> <a id="short" href="<%=urls[shortVersion].longURL%>" class="text-dark"> <%=shortVersion%> </td>
+        </tr>
+        <tr>
+            <form method="POST" action="/urls/<%= shortVersion %>"><input id="enter-update" type="text"
+                    name="longURL"><button id="update" class="btn-outline-dark btn-md">Update</button></input> </form>
+            </td>
+            </tbody>
     </table>
-
-
+    <form method="GET" action="/urls"><input type="hidden" name="home" placeholder="Click to go home">
+        </input><button id="go-home" class="btn mt-5 btn-space btn-outline-dark btn-lg"> Phone ~/ </button></form>
+    <form method="POST" action="/logout"><input type="hidden" name="logout" placeholder="Click to logout">
+        </input><button id="logout" class="pl-4 pr-4 btn btn-outline-dark btn-lg"> Logout </button></form>
 </body>
 
 </html>
