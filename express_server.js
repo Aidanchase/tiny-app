@@ -110,9 +110,8 @@ app.get("/login", (req, res) => {
   res.render("login_page")
 })
 app.post("/login", (req, res) => { // user email and password in database checked against input
-  const password = req.body.password
+  const password = req.body.password;
   const userId = emailLookup(req.body.email)
-  console.log("user id:", userId)
   if (userId && bcrypt.compareSync(password, users[userId].password)) {
     req.session.user_id = userId;
     res.redirect("/urls");
@@ -155,10 +154,12 @@ app.post("/urls/:shortURL/delete", (req, res) => { //delete user short urls
 app.get("/urls/:shortURL", (req, res) => { //show individual short urls
   const user_id = req.session.user_id;
   let templateVars = {
+    urls: urlsForUser(user_id),
     shortVersion: req.params.shortURL,
     longVersion: urlDatabase[req.params.shortURL],
     user: users[user_id]
   };
+  // console.log(templateVars);
   res.render("urls_show", templateVars);
 });
 app.get("/u/:shortURL", (req, res) => {
