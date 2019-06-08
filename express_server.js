@@ -65,7 +65,11 @@ app.listen(PORT, () => {
   console.log(`TinyApp listening on port ${PORT}!`);
 });
 app.get("/", (req, res) => {
-  res.render("login_page");
+  if(users[req.session.user_id]){
+    res.redirect("/urls");
+  } else {
+  res.redirect("/login");
+  }
 });
 app.get("/urls", (req, res) => { //get and render unique user index page
   const user_id = req.session.user_id;
