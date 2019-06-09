@@ -2,6 +2,7 @@
 <html>
 
 <head>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
@@ -14,19 +15,18 @@
             padding-top: 80px;
         }
 
-        #signup {
-            font-family: "Diplomata";
+        body {
+            padding-top: 80px;
         }
 
-        #email,
-        #password,
-        #register,
-        #have-one,
-        #signin,
-            {
-            font-family: 
-            "Fredericka the Great";
+        #signup{
+            font-family: "Diplomata";
         }
+        
+        #email, #password, #register, #have-one, #signin  {
+            font-family: "Fredericka the Great";
+        }
+
     </style>
 </head>
 
@@ -34,12 +34,11 @@
     <div class="container">
         <div class="col-sm-6 col-sm-offset-3">
 
-            <h1><span class="fa fa-sign-in"></span> <span id="signup"> Sign Up</span></h1>
-
-            <!-- LOGIN FORM -->
+            <h1 id="signup"><span class="fa fa-sign-in"></span> Sign Up</h1>
+           <hr>
             <form action="/register" method="post">
                 <div class="form-group">
-                    <label id="email">Enter your email</label>
+                    <label id="email"> Enter your email</label>
                     <input type="text" class="form-control" name="email">
                 </div>
                 <div class="form-group">
@@ -47,9 +46,12 @@
                     <input type="password" class="form-control" name="password">
                 </div>
 
+                <p id="have-one"> Have an account? <a id="signin" href="/login">Sign in</a></p>
                 <button id="register" type="submit" class="btn btn-dark btn-lg">Register</button>
             </form>
 
             <hr>
 
-            <p id="have-one"> Have an account? <a href="/login">Sign in</a></p </div> </div> </body>
+        </div>
+    </div>
+</body>

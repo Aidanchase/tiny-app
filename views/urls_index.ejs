@@ -15,6 +15,7 @@
 
     #short-url,
     #long-url,
+    #go-home,
     #edit,
     #delete {
       font-family: "Fredericka the Great";
@@ -46,6 +47,10 @@
         </tbody>
       </table>
     </div>
+    <form method="GET" action="/urls"><input type="hidden" name="home" placeholder="Click to go home">
+      </input><button id="go-home" class="btn mt-5 btn-space btn-outline-dark btn-lg"> Phone ~/ </button></form>
+    <form method="POST" action="/logout"><input type="hidden" name="logout" placeholder="Click to logout">
+      </input><button id="logout" class="pl-4 pr-4 btn btn-outline-dark btn-lg"> Logout </button></form>
   </body>
 </span>
 
