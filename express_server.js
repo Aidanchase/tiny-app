@@ -41,7 +41,7 @@ const users = {};
 // generate random user id
 function generateRandomString(length, chars) {
   let result = "";
-  for (var i = length; i > 0; --i)
+  for (let i = length; i > 0; --i)
     result += chars[Math.floor(Math.random() * chars.length)];
   return result;
 };
