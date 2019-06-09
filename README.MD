@@ -26,4 +26,4 @@ Tiny app is a full stack web application built with  node and express to create 
 
 - Install all dependencies (npm install)
 - Run the development web server (node express_server.js)
-- Create tinyURLS  and share them with your friends!`
+- Create tinyURLS  and share them with your friends!
