@@ -13,18 +13,9 @@
       font-family: "Diplomata";
     }
 
-    #short-url {
-      font-family: "Fredericka the Great";
-    }
-
-    #long-url {
-      font-family: "Fredericka the Great";
-    }
-
-    #edit {
-      font-family: "Fredericka the Great";
-    }
-
+    #short-url,
+    #long-url,
+    #edit,
     #delete {
       font-family: "Fredericka the Great";
     }
@@ -42,9 +33,8 @@
         <% for(let url in urls) { %>
         <tbody>
           <tr>
-            <td class="text-center"> <a id="short-url" href="<%=urls[url].longURL%>"
-                class="text-dark"><%=url%> ----> </a> <a id="long-url" href="<%=urls[url].longURL%>"
-                class="text-dark"><%= urls[url].longURL %></a></td>
+            <td class="text-center"> <a id="short-url" href="<%=urls[url].longURL%>" class="text-dark"><%=url%> ---->
+              </a> <a id="long-url" href="<%=urls[url].longURL%>" class="text-dark"><%= urls[url].longURL %></a></td>
             <td> <a id="edit" href="/urls/<%= url %>" class="text-dark"> Edit </a></td>
             <td>
               <form method="POST" action="/urls/<%= url %>/delete"><button id="delete"
